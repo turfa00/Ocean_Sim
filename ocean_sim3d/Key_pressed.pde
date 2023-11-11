@@ -1,9 +1,8 @@
 void keyPressed() {
   if(key == ' '){
-    //println(forceQuad.position);
-    randomForce = random(10, 30);
+    timeStepForce = 0.f;
   }
-  if(keyPressed)
+  if(keyPressed && key == ' ')
     keyPress = true;
   if (key == CODED && keyPress){
     move = Radius;

@@ -3,7 +3,6 @@ public class Height_field{
   Particle[][] Particles;
   float [][] zValues;
   Height_field(){
-    //Particles = new ArrayList <Particle>();
     Particles = new Particle[N][N];
   }
   
@@ -40,103 +39,55 @@ public class Height_field{
     }
   }
   
-  void waveTest1(){
-    theta += 0.02;
-    float period = random(100,300); // How many pixels before the wave repeats
-    float dx = (TWO_PI / period);
-    for(int i = 0; i < N; i++){
-      float x = theta;
-      for(int j = 0; j < N; j++){
-        if(i % 2 == 0){
-          Particles[i][j].position.z += sin(x) * random(1,3);
-        }
-        else{
-          //Particles[i][j].position.z += cos(x) * random(1, 3);
-          Particles[i][j].position.z += sin(x) * random(1,3);
-        }
-        x += dx;
-      }
-    }
-  }
-  
   void waveTest2(){ 
+    int center = N/2;
     for(int i = 0; i < N; i++){
       for(int j = 0; j < N; j++){
+        Particles[i][j].position.z = 0;
+      }
+    }
+    for(int i = 0; i < N; i++){
+      for(int j = 0; j < N; j++){
+        int dx = i - center;
+        int dy = j - center;
+        float distance = sqrt(dx * dx + dy * dy);
+        //Particles[i][j].position.z += Particles[i][j].amplitude * sin((distance / Radius) - timeStep); //Second test
         //Particles[i][j].position.z = Particles[i][j].amplitude * cos(Particles[i][j].position.x /Radius - timeStep / Radius); //First test
-        Particles[i][j].position.z = Particles[i][j].amplitude * cos(Particles[i][j].position.x - timeStep); //Second test
-        Particles[i][j].amplitude*=0.997;
-        //Particles[i][j].position.z = (0.5) * cos((2 * PI * Particles[i][j].amplitude / Radius) + 1) ;//* rectangleFunction(Particles[i][j].amplitude / Radius); 
+        //Particles[j][i].position.z += Particles[j][i].amplitude * sin(Particles[j][i].position.x / Radius * 4 - timeStep); //Second test
+        Particles[i][j].position.z += Particles[i][j].amplitude * sin((Particles[i][j].position.x / Radius) + timeStep); //Second test
+        Particles[i][j].position.z += Particles[i][j].amplitude * sin((Particles[i][j].position.y / Radius) + timeStep); //Second test
+        Particles[i][j].amplitude *=0.997;
       }
     }
-  }
-  void waveTest3(){ 
-    for(int i = 0; i < N; i++){
-      for(int j = 0; j < N; j++){
-        //Particles[i][j].position.z = Particles[i][j].amplitude * cos(Particles[i][j].position.x /Radius - timeStep / Radius);
-        Particles[j][i].position.z = Particles[j][i].amplitude * cos(Particles[j][i].position.x - timeStep);
-        if(i > N/2)
-          Particles[j][i].position.z = Particles[j][i].amplitude * cos(Particles[j][i].position.x - timeStep * sqrt(Radius));
-      }
+    if(keyPressed && key == ' '){
+      keyPress = true;
+      
     }
-  }
-  
-  void waveTest4(){
-    if(keyPressed){
-      if(key == ' ' && keyPress){
+      if(keyPress){
+        //timeStepForce = 0.f;
         PVector waveStart = forceQuad.position;
-        //int i = int(forceQuad.position.x);
-        int ip = int(forceQuad.position.x);
-        //int j = int(forceQuad.position.y);
-        int jp = int(forceQuad.position.y);
-        Particles[ip/Radius][jp/Radius].position.z = random(1,10);
-        //while(i > 0 || ip < N-1){
-          //while(j > 0 || jp < N-1){
-        for(int i = 1; i < N-2; i++){
-          for(int j = 1; j < N-2; j++){
-            float force = 0.0;
-            force += Particles[i-1][j-1].position.z - Particles[i][j].position.z;
-            force += Particles[i-1][j].position.z - Particles[i][j].position.z;
-            force += Particles[i-1][j+1].position.z - Particles[i][j].position.z;
-            //over
-            force += Particles[i+1][j-1].position.z - Particles[i][j].position.z;
-            force += Particles[i+1][j].position.z - Particles[i][j].position.z;
-            force += Particles[i+1][j+1].position.z - Particles[i][j].position.z;
-            //sidene
-            force += Particles[i][j-1].position.z - Particles[i][j].position.z;
-            force += Particles[i][j+1].position.z - Particles[i][j].position.z;
+        int centerX = int(forceQuad.position.x);
+        int centerY = int(forceQuad.position.y);
+        float amplitudeF;
+        timeStepForce = (millis() - timeStepForce) / 1000;
+        println(timeStepForce);
+        for(int i = 0; i < N; i++){
+          amplitudeF = random(30/timeStepForce,40/timeStepForce);
+          for(int j = 0; j < N; j++){
+            int dx = i - centerX;
+            int dy = j - centerY;
+            float distance = sqrt(dx * dx + dy * dy);
             
-            force -= Particles[i][j+1].position.z / 8;
-            
-            Particles[i][j].position.z += force / 1; 
+            Particles[i][j].position.z += amplitudeF * sin((distance / Radius) - timeStep); //Second test
+            //Particles[i][j].position.z = Particles[i][j].amplitude * cos(Particles[i][j].position.x /Radius - timeStep / Radius); //First test
+            //Particles[j][i].position.z += Particles[j][i].amplitude * sin(Particles[j][i].position.x / Radius * 4 - timeStep); //Second test
+            //Particles[i][j].position.z += Particles[i][j].amplitude * sin((Particles[i][j].position.x / Radius) + timeStep); //Second test
+            //Particles[i][j].position.z += Particles[i][j].amplitude * cos((Particles[i][j].position.y / Radius) + timeStep); //Second test
+            //amplitudeF *= 0.8f;
+            //Particles[i][j].amplitude *=0.997;
           }
+          //amplitudeF = 0.f;
         }
-        println(forceQuad.position);
       }
-    }
-  }
-  /*
-  for(int i = 1; i < N-2; i++){
-          for(int j = 1; j < N-2; j++){
-            Particles[i-1][j-1].position.z = Particles[i-1][j-1].amplitude * cos(Particles[i][j].position.x - timeStep);
-            Particles[i-1][j].position.z = Particles[i-1][j].amplitude * cos(Particles[i][j].position.x - timeStep);
-            Particles[i-1][j+1].position.z = Particles[i-1][j+1].amplitude * cos(Particles[i][j].position.x - timeStep);
-            //over
-            Particles[i+1][j-1].position.z = Particles[i+1][j-1].amplitude * cos(Particles[i][j].position.x - timeStep);
-            Particles[i+1][j].position.z = Particles[i+1][j].amplitude * cos(Particles[i][j].position.x - timeStep);
-            Particles[i+1][j+1].position.z = Particles[i+1][j+1].amplitude * cos(Particles[i][j].position.x - timeStep);
-            //sidene
-            Particles[i][j-1].position.z = Particles[i][j-1].amplitude * cos(Particles[i][j].position.x - timeStep);
-            Particles[i][j+1].position.z = Particles[i][j+1].amplitude * cos(Particles[i][j].position.x - timeStep);
-          }
-        }*/
-  
-  void waveTest6(){ 
-    for(int i = 0; i < N; i++){
-      for(int j = 0; j < N; j++){
-        //Particles[i][j].position.z = Particles[i][j].amplitude * cos(Particles[i][j].position.x /Radius - timeStep / Radius); //First test
-        Particles[i][j].position.z = Particles[i][j].amplitude * cos(Particles[i][j].position.x - timeStep); //Second test
-        //Particles[i][j].position.z = (0.5) * cos((2 * PI * Particles[i][j].amplitude / Radius) + 1) ;//* rectangleFunction(Particles[i][j].amplitude / Radius); 
-      }
-    }
   }
 }
