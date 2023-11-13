@@ -4,7 +4,7 @@ void keyPressed() {
   }
   if(keyPressed && key == ' ')
     keyPress = true;
-  if (key == CODED && keyPress){
+  if (key == CODED){
     move = Radius;
     if(keyCode == UP){
       forceQuad.position.y -= move;
