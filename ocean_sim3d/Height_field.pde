@@ -52,13 +52,15 @@ public class Height_field{
         int dy = j - center;
         float distance = sqrt(dx * dx + dy * dy);
         //Particles[i][j].position.z += Particles[i][j].amplitude * sin((distance / Radius) - timeStep); //Second test
-        //Particles[i][j].position.z = Particles[i][j].amplitude * cos(Particles[i][j].position.x /Radius - timeStep / Radius); //First test
-        //Particles[j][i].position.z += Particles[j][i].amplitude * sin(Particles[j][i].position.x / Radius * 4 - timeStep); //Second test
-        Particles[i][j].position.z += Particles[i][j].amplitude * sin((Particles[i][j].position.x / Radius) + timeStep); //Second test
-        Particles[i][j].position.z += Particles[i][j].amplitude * sin((Particles[i][j].position.y / Radius) + timeStep); //Second test
-        Particles[i][j].amplitude *=0.997;
+        //Particles[i][j].position.z += Particles[i][j].amplitude * sin((distance / Radius) - timeStep); //Second test
+        Particles[i][j].position.z += Particles[i][j].amplitude * sin((Particles[i][j].position.x / Radius) + timeStep);
+        Particles[i][j].position.z += Particles[i][j].amplitude * sin((Particles[i][j].position.y / Radius) + timeStep); //First test
+        //Particles[i][j].position.z += Particles[i][j].amplitude * 0.5 * cos((2 * PI * Particles[i][j].position.x / Radius)+ 1 - timeStep);
+        //Particles[i][j].position.z += Particles[i][j].amplitude * 0.5 * cos((2 * PI * Particles[i][j].position.y / Radius)+ 1 - timeStep); //Second test
+        //Particles[i][j].amplitude *= 0.997;
       }
     }
+    createWave(N/2, N/2);
     if(keyPressed && key == ' '){
       keyPress = true;
       
@@ -71,6 +73,7 @@ public class Height_field{
         float amplitudeF;
         timeStepForce = (millis() - timeStepForce) / 1000;
         println(timeStepForce);
+        keyPress = false;
         for(int i = 0; i < N; i++){
           amplitudeF = random(30/timeStepForce,40/timeStepForce);
           for(int j = 0; j < N; j++){
@@ -89,5 +92,19 @@ public class Height_field{
           //amplitudeF = 0.f;
         }
       }
+  }
+  public void createWave(int centerX, int centerY){
+    float amplitude = random(5, 10);
+    for(int i = 0; i < N; i++){
+      for(int j = 0; j < N; j++){
+        int dx = i - centerX;
+        int dy = j - centerY;
+        float distance = sqrt(dx * dx + dy * dy);
+        Particles[i][j].position.z += Particles[i][j].amplitude * sin((distance / Radius) - timeStep); //Second test
+        Particles[i][j].amplitude *= 0.999;
+      }
+    }
+    
+    
   }
 }

@@ -19,15 +19,4 @@ public class Particle{
   void setVelocity(PVector v){ 
     this.velocity = v;
   }
-  
-  void deviationFunction(float time){
-    //return amplitude * this.waveformFunction(
-    
-  }
-  
-  public float waveformFunction(float u){
-    return (0.5) * cos((2 * PI * u / radius) + 1) * 1 * rectangleFunction(u / radius);  
-    
-  }
-  
 }

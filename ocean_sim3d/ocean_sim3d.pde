@@ -1,5 +1,5 @@
-int N = 100;
-int Radius = 10;
+int N = 60;
+int Radius = 20;
 float move, randomForce;
 float theta = 0.0;
 float startTime, timeStep, timeStepForce;
@@ -21,7 +21,7 @@ void setup(){
   forceQuad = new Force(0, 0, Radius);
   for(int i = 0; i < N; i++){
     for(int j = 0; j < N; j++){
-      Particle p = new Particle(i, j, 0, Radius, random(2,8));
+      Particle p = new Particle(i, j, 0, Radius, random(20,30));
       heightField.Particles[i][j] = p;
       //heightField.Particles.add(new Particle(i, j, 0, Radius));
     } 
@@ -40,14 +40,13 @@ void draw(){
   keyPressed();
   timeStep = (millis() - timeStep) / 1000;
 }
-
-public float rectangleFunction(float u){
-    float x = 0.0;
-    if(abs(u) > 0.5)
-      x = 0;
-    if(abs(u) == 0.5)
-      x = 0.5;
-    if(abs(u) < 0.5)
-      x = 1;
-    return x;
+public float rectangleFunction(float t, float a){
+    float v = 0;
+    if(abs(t) > a/2)
+      v = 0;
+    if(abs(t) == a/2)
+      v = 0.5;
+    if(abs(t) < a/2)
+      v = 1;
+    return v;
 }
