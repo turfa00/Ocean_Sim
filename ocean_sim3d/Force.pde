@@ -8,7 +8,8 @@ public class Force{
   
   void drawF(){
     pushMatrix();
-    //fill(0, 0, 255);
+    strokeWeight(2);
+    fill(0, 0, 255);
     stroke(255, 0, 255);
     rect(position.x, position.y, Radius, Radius);
     popMatrix();
