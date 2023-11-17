@@ -1,10 +1,10 @@
 void keyPressed() {
   if(keyPressed && key == ' ' && keyPress == false){
-    println("True");
+    println("Force enabled");
     keyPress = true;
   }
   if(keyPressed && key == 's' && keyPress == true){
-    println("False");
+    println("Force disabled");
     keyPress = false;
   }
   if(keyPressed){

@@ -6,7 +6,7 @@ public class Force{
     this.radius = r;
   }
   
-  void drawF(){
+  void drawQuad(){
     pushMatrix();
     strokeWeight(2);
     fill(0, 0, 255);

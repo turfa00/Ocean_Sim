@@ -1,5 +1,4 @@
 public class Height_field{
-  //ArrayList <Particle> Particles;
   Particle[][] Particles;
   float [][] zValues;
   Height_field(){
@@ -15,7 +14,6 @@ public class Height_field{
       beginShape();
       for(int j = 0; j < N; j++){
         vertex(Particles[i][j].position.x * Radius, Particles[i][j].position.y * Radius, Particles[i][j].position.z);
-        //vertex(i*Radius, j*Radius, 0);
       }
       endShape();
     }
@@ -23,14 +21,13 @@ public class Height_field{
       beginShape();
       for(int i = 0; i < N; i++){
         vertex(Particles[i][j].position.x * Radius, Particles[i][j].position.y * Radius, Particles[i][j].position.z);
-        //vertex(j*Radius, i*Radius, 0);
       }
       endShape();
     }
   }
   
   void drawFieldPoints(){ 
-    strokeWeight(4);
+    strokeWeight(2);
     stroke(255);
     for(int i = 0; i < N; i++){
       for(int j = 0; j < N; j++){
@@ -40,7 +37,7 @@ public class Height_field{
   }
   
   
-  void waveTest3(){ 
+  public void waveSimulation(){ 
     //Normalize height grid to have ocean like waves
     for(int i = 0; i < N; i++){
       for(int j = 0; j < N; j++){
@@ -51,17 +48,18 @@ public class Height_field{
     for(int i = 0; i < nbWaves; i++){
       createWave(randomPos[i], randomPos[i+1], waveAmplitudeCoefficient);
     }
-    for(int i = 1; i < N-2; i++){
-      for(int j = 1; j < N-2; j++){
+    for(int i = 1; i < N-1; i++){
+      for(int j = 1; j < N-1; j++){
         float amplitude = 0.0;
+        //En dessous
         amplitude += Particles[i-1][j-1].position.z - Particles[i][j].position.z;
         amplitude += Particles[i-1][j].position.z - Particles[i][j].position.z;
         amplitude += Particles[i-1][j+1].position.z - Particles[i][j].position.z;
-        //over
+        //Au dessus
         amplitude += Particles[i+1][j-1].position.z - Particles[i][j].position.z;
         amplitude += Particles[i+1][j].position.z - Particles[i][j].position.z;
         amplitude += Particles[i+1][j+1].position.z - Particles[i][j].position.z;
-        //sidene
+        //Les côtes
         amplitude += Particles[i][j-1].position.z - Particles[i][j].position.z;
         amplitude += Particles[i][j+1].position.z - Particles[i][j].position.z;
         
@@ -73,6 +71,7 @@ public class Height_field{
       }
     }
     if(keyPress){ 
+      //Si touche éspace appuyer, créer des vagues causé par une force qui vient du quad 
       int centerX = int(forceQuad.position.x);
       int centerY = int(forceQuad.position.y);
       //Particles[centerX][centerY].position.z += 100;
@@ -82,6 +81,7 @@ public class Height_field{
   }
   
   public void createWave(int centerX, int centerY, float coefficient){
+    //Fonction pour créer des vagues venant d'une position
     for(int i = 0; i < N; i++){
       for(int j = 0; j < N; j++){
         int dx = i - centerX;
@@ -92,6 +92,7 @@ public class Height_field{
     }
   }
   public void createWave2(int centerX, int centerY, float coefficient){
+    //Fonction pour créer des vagues d'une position
     //for(int i = centerX; i < N; i = i+1 % N){
       //for(int j = centerY; j < N; j = j+1 % N){
     for(int i = 0; i < N; i++){
@@ -99,7 +100,7 @@ public class Height_field{
         int dx = i - centerX;
         int dy = j - centerY;
         float distance = sqrt((dx * dx) + (dy * dy));
-        Particles[i][j].position.z += coefficient * sin(((-pow(distance,2))/ (Radius)) - timeStep);
+        Particles[i][j].position.z += coefficient * sin(((-pow(distance,2))/ (Radius)) + timeStep);
       }
     }
   }
