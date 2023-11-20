@@ -44,10 +44,12 @@ public class Height_field{
         Particles[i][j].position.z *= zCoefficient;
       }
     }
-    //Create random waves from different positions on the grid
+    //Créer des vagues aléatoires à partir de differents positions sur la grille
     for(int i = 0; i < nbWaves; i++){
-      createWave(randomPos[i], randomPos[i+1], waveAmplitudeCoefficient);
+      createWave(randomPos[i], randomPos[i+1], waveIntensity);
     }
+    
+    //Accumuler les forces d'un particule venant de differents particules voisins
     for(int i = 1; i < N-1; i++){
       for(int j = 1; j < N-1; j++){
         float amplitude = 0.0;
@@ -64,43 +66,38 @@ public class Height_field{
         amplitude += Particles[i][j+1].position.z - Particles[i][j].position.z;
         
         amplitude -= Particles[i][j+1].position.z;
-        float z = Particles[i][j].position.z * 0.995 + amplitude/10; //First Test
-        //float z = Particles[i][j].position.z * 0.995 + amplitude/100; //Second Test
-        //Particles[i][j].position.z += z  * sin(((pow(distance,2))/ (Radius)) - timeStep);
+        
+        float z = Particles[i][j].position.z + amplitude/10;
         Particles[i][j].position.z += z;
       }
     }
     if(keyPress){ 
       //Si touche éspace appuyer, créer des vagues causé par une force qui vient du quad 
-      int centerX = int(forceQuad.position.x);
-      int centerY = int(forceQuad.position.y);
-      //Particles[centerX][centerY].position.z += 100;
-      //Particles[centerX][centerY].amplitude += 100;
-      createWave2(centerX, centerY, 4);
+      int centerX = int(forceQuad.position.x / Radius);
+      int centerY = int(forceQuad.position.y / Radius);
+      createWave2(centerX, centerY, waveIntensity * 6);
     }
   }
   
-  public void createWave(int centerX, int centerY, float coefficient){
+  public void createWave(int centerX, int centerY, float intensity){
     //Fonction pour créer des vagues venant d'une position
     for(int i = 0; i < N; i++){
       for(int j = 0; j < N; j++){
         int dx = i - centerX;
         int dy = j - centerY;
         float distance = sqrt((dx * dx) + (dy * dy));
-        Particles[i][j].position.z += coefficient * Particles[i][j].amplitude * sin(((pow(distance,2))/ (Radius)) - timeStep);
+        Particles[i][j].position.z += intensity * Particles[i][j].amplitude * sin(((pow(distance,2))/ (Radius)) - timeStep);
       }
     }
   }
-  public void createWave2(int centerX, int centerY, float coefficient){
-    //Fonction pour créer des vagues d'une position
-    //for(int i = centerX; i < N; i = i+1 % N){
-      //for(int j = centerY; j < N; j = j+1 % N){
+  public void createWave2(int centerX, int centerY, float intensity){
+    //Fonction pour créer des vagues venant d'une position
     for(int i = 0; i < N; i++){
       for(int j = 0; j < N; j++){
         int dx = i - centerX;
         int dy = j - centerY;
         float distance = sqrt((dx * dx) + (dy * dy));
-        Particles[i][j].position.z += coefficient * sin(((-pow(distance,2))/ (Radius)) + timeStep);
+        Particles[i][j].position.z += intensity * Particles[i][j].amplitude * sin(((pow(distance,2))/ (Radius)) - timeStep);
       }
     }
   }

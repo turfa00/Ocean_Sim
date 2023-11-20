@@ -9,10 +9,10 @@ void keyPressed() {
   }
   if(keyPressed){
     if(key == 'i'){
-      waveAmplitudeCoefficient += 0.001;
+      waveIntensity += 0.001;
     }
     if(key == 'k'){
-      waveAmplitudeCoefficient -= 0.001;
+      waveIntensity -= 0.001;
     }
     if (key == CODED){
       move = Radius;
