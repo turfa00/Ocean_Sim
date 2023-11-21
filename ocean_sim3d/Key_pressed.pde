@@ -15,18 +15,19 @@ void keyPressed() {
       waveIntensity -= 0.001;
     }
     if (key == CODED){
-      move = Radius;
-      if(keyCode == UP && forceQuad.position.y-1 > 0){
-        forceQuad.position.y -= move;
+      //move = Radius;
+      move = Radius/10;
+      if(keyCode == UP && box.position.y-1 > 0){
+        box.position.y -= move;
       }
-      if(keyCode == DOWN && forceQuad.position.y+1 < (N-1)*Radius){
-        forceQuad.position.y += move;
+      if(keyCode == DOWN && box.position.y+1 < (N-1)*Radius){
+        box.position.y += move;
       }
-      if(keyCode == RIGHT && forceQuad.position.x+1 < (N-1)*Radius){
-        forceQuad.position.x += move;
+      if(keyCode == RIGHT && box.position.x+1 < (N-1)*Radius){
+        box.position.x += move;
       }
-      if(keyCode == LEFT && forceQuad.position.x > 0){
-        forceQuad.position.x -= move;
+      if(keyCode == LEFT && box.position.x > 0){
+        box.position.x -= move;
       }
     }
   }

@@ -1,18 +1,27 @@
-public class Force{
+public class Box{
   PVector position;
   float radius;
-  Force(float x, float y, float r){
+  Height_field heightfield;
+  Box(float x, float y, float r, Height_field hf){
     this.position = new PVector(x, y, 0);
     this.radius = r;
+    heightfield = hf;
   }
   
-  void drawQuad(){
-    pushMatrix();
-    strokeWeight(2);
-    fill(0, 0, 255);
-    stroke(255, 0, 255);
-    rect(position.x, position.y, Radius, Radius);
-    popMatrix();
+  void drawBox(){
+    if(keyPress){
+      position.z = heightfield.Particles[int(position.x/radius)][int(position.y/radius)].position.z;
+      //println(int(this.position.x) + ", " + int(this.position.y));
+      pushMatrix();
+      strokeWeight(2);
+      fill(150, 75, 0);
+      stroke(150, 75, 0);
+      //rect(position.x, position.y, Radius, Radius);
+      translate(Radius/2 + position.x, Radius/2 + position.y, Radius/2 + position.z);
+      box(Radius, Radius, Radius);
+      popMatrix();
+    }
+    
   }
   
   

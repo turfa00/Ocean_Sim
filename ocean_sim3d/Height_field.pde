@@ -73,9 +73,11 @@ public class Height_field{
     }
     if(keyPress){ 
       //Si touche éspace appuyer, créer des vagues causé par une force qui vient du quad 
-      int centerX = int(forceQuad.position.x / Radius);
-      int centerY = int(forceQuad.position.y / Radius);
-      createWave2(centerX, centerY, waveIntensity * 6);
+      int centerX = int(box.position.x / Radius);
+      int centerY = int(box.position.y / Radius);
+      //createWave2(centerX, centerY, waveIntensity * 6);
+      createWaveBox(centerX, centerY, waveIntensity * 4);
+      //createWave3(centerX, centerY, waveIntensity * 6);
     }
   }
   
@@ -90,14 +92,17 @@ public class Height_field{
       }
     }
   }
-  public void createWave2(int centerX, int centerY, float intensity){
+  public void createWaveBox(int centerX, int centerY, float intensity){
     //Fonction pour créer des vagues venant d'une position
+    float tempIntensity = 0.f;
     for(int i = 0; i < N; i++){
       for(int j = 0; j < N; j++){
         int dx = i - centerX;
         int dy = j - centerY;
         float distance = sqrt((dx * dx) + (dy * dy));
-        Particles[i][j].position.z += intensity * Particles[i][j].amplitude * sin(((pow(distance,2))/ (Radius)) - timeStep);
+        tempIntensity = abs((intensity * distance) - maxDistance);
+        tempIntensity /= Radius * 6;
+        Particles[i][j].position.z += tempIntensity * Particles[i][j].amplitude * sin(((pow(distance,2))/ (Radius)) - timeStep*2);
       }
     }
   }

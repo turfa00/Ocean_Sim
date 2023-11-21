@@ -5,13 +5,14 @@ int minAmplitude = 0, maxAmplitude = 25;
 float move, randomForce;
 int [] randomPos = new int[nbWaves*2];
 float waveIntensity = 0.08;
+float maxDistance = sqrt(2 * (N * N));
 float zCoefficient = 0.4;
 float startTime, timeStep, timeStepForce;
 boolean keyPress = false;
 import peasy.*;
 PeasyCam cam;
 Height_field heightField;
-Force forceQuad = new Force(0, 0, Radius);
+Box box;
 
 void setup(){
   //fullScreen(P3D);
@@ -21,7 +22,6 @@ void setup(){
   cam.setMinimumDistance(-20000);
   cam.setMaximumDistance(200000000);
   heightField = new Height_field();
-  forceQuad = new Force(0, 0, Radius);
   for(int i = 0; i < N; i++){
     for(int j = 0; j < N; j++){
       //Tout les particules ont le même rayon pour une meilleure simulation
@@ -29,6 +29,7 @@ void setup(){
       heightField.Particles[i][j] = p;
     } 
   }
+  box = new Box(0, 0, Radius, heightField);
   for(int i = 0; i < nbWaves*2; i++){
     //Créer des positions aléatoires où les vagues seront créer
     randomPos[i] = int(random(0,N));
@@ -44,7 +45,7 @@ void draw(){
   heightField.waveSimulation();
   heightField.drawField();
   //heightField.drawFieldPoints();
-  forceQuad.drawQuad();
+  box.drawBox();
   keyPressed();
   timeStep = (millis() - timeStep) / 1000;
 }
