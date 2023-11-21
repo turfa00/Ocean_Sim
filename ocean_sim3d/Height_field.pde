@@ -7,7 +7,7 @@ public class Height_field{
   
   void drawField() {
     strokeWeight(1);
-    stroke(0, 255, 255);
+    stroke(15, 94, 156);
     noFill();
     //Quads
     for(int i = 0; i < N; i++){

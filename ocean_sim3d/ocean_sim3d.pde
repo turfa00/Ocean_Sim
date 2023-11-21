@@ -1,9 +1,8 @@
 int N = 60;
 int nbWaves = 5;
 int Radius = 60;
-int minAmplitude = 5, maxAmplitude = 15;
+int minAmplitude = 0, maxAmplitude = 25;
 float move, randomForce;
-float wave;
 int [] randomPos = new int[nbWaves*2];
 float waveIntensity = 0.08;
 float zCoefficient = 0.4;
@@ -25,7 +24,7 @@ void setup(){
   forceQuad = new Force(0, 0, Radius);
   for(int i = 0; i < N; i++){
     for(int j = 0; j < N; j++){
-      //Tout les particules ont le même rayon
+      //Tout les particules ont le même rayon pour une meilleure simulation
       Particle p = new Particle(i, j, random(-1, 1), Radius, random(minAmplitude,maxAmplitude));
       heightField.Particles[i][j] = p;
     } 
