@@ -7,7 +7,8 @@ public class Height_field{
   
   void drawField() {
     strokeWeight(1);
-    stroke(15, 94, 156);
+    //stroke(15, 94, 156); //Watery Blue
+    stroke(255, 255, 255);
     noFill();
     //Quads
     for(int i = 0; i < N; i++){
@@ -75,7 +76,10 @@ public class Height_field{
       //Si touche éspace appuyer, créer des vagues causé par une force qui vient du quad 
       int centerX = int(box.position.x / Radius);
       int centerY = int(box.position.y / Radius);
-      createWaveBox(centerX, centerY, waveIntensity * 4);
+      //createWaveBox(centerX, centerY, waveIntensity * 4);
+      createWaveBox(centerX, centerY, waveIntensity * 4); //For tests
+      //box.direction.mult(0.4);
+      box.direction = new PVector(0, 0);
     }
   }
   
@@ -91,9 +95,37 @@ public class Height_field{
     }
   }
   public void createWaveBox(int centerX, int centerY, float intensity){
-    //Fonction pour créer des vagues venant d'une position
+    //Fonction pour créer des vagues venant du boite
+    float angle = 0.f;
+    PVector tempDir = box.direction.copy();
+    //float maxIntensity = abs((intensity * 0) - maxDistance);
+    //println(maxIntensity / (Radius * 6));
     float tempIntensity = 0.f;
     for(int i = 0; i < N; i++){
+      for(int j = 0; j < N; j++){
+        int dx = i - centerX;
+        int dy = j - centerY;
+        float distance = sqrt((dx * dx) + (dy * dy));
+        tempIntensity = abs((intensity * distance) - maxDistance);
+        tempIntensity /= (Radius * 5);
+        
+        //println(tempIntensity);
+        if(tempDir.x > 0 && i < centerX){
+          tempIntensity *= zCoefficient;
+        }
+        if(tempDir.y > 0 && j < centerY){
+          tempIntensity *= zCoefficient;
+        }
+        if(tempDir.x < 0 && i > centerX){
+          tempIntensity *= zCoefficient;
+        }
+        if(tempDir.y < 0 && j > centerY){
+          tempIntensity *= zCoefficient;
+        }
+        Particles[i][j].position.z += tempIntensity * Particles[i][j].amplitude * sin(((pow(distance,2))/ (Radius)) - timeStep*2);
+      }
+    }
+    /*for(int i = 0; i < N; i++){
       for(int j = 0; j < N; j++){
         int dx = i - centerX;
         int dy = j - centerY;
@@ -102,6 +134,6 @@ public class Height_field{
         tempIntensity /= Radius * 6;
         Particles[i][j].position.z += tempIntensity * Particles[i][j].amplitude * sin(((pow(distance,2))/ (Radius)) - timeStep*2);
       }
-    }
+    }*/
   }
 }

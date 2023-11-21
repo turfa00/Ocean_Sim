@@ -1,11 +1,13 @@
 public class Box{
   PVector position;
+  PVector direction;
   float radius;
   Height_field heightfield;
   Box(float x, float y, float r, Height_field hf){
     this.position = new PVector(x, y, 0);
     this.radius = r;
     heightfield = hf;
+    direction = new PVector(0, 0);
   }
   
   void drawBox(){

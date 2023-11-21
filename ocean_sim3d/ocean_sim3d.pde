@@ -1,7 +1,7 @@
 int N = 60;
 int nbWaves = 5;
 int Radius = 60;
-int minAmplitude = 0, maxAmplitude = 25;
+int minAmplitude = 0, maxAmplitude = 20;
 float move, randomForce;
 int [] randomPos = new int[nbWaves*2];
 float waveIntensity = 0.08;
