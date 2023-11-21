@@ -75,9 +75,7 @@ public class Height_field{
       //Si touche éspace appuyer, créer des vagues causé par une force qui vient du quad 
       int centerX = int(box.position.x / Radius);
       int centerY = int(box.position.y / Radius);
-      //createWave2(centerX, centerY, waveIntensity * 6);
       createWaveBox(centerX, centerY, waveIntensity * 4);
-      //createWave3(centerX, centerY, waveIntensity * 6);
     }
   }
   

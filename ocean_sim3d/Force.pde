@@ -10,13 +10,12 @@ public class Box{
   
   void drawBox(){
     if(keyPress){
+      //Prendre la hauteur du particule courant
       position.z = heightfield.Particles[int(position.x/radius)][int(position.y/radius)].position.z;
-      //println(int(this.position.x) + ", " + int(this.position.y));
       pushMatrix();
       strokeWeight(2);
       fill(150, 75, 0);
       stroke(150, 75, 0);
-      //rect(position.x, position.y, Radius, Radius);
       translate(Radius/2 + position.x, Radius/2 + position.y, Radius/2 + position.z);
       box(Radius, Radius, Radius);
       popMatrix();
