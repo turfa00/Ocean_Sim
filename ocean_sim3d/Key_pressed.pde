@@ -1,22 +1,25 @@
 void keyPressed() {
   if(keyPressed && key == ' ' && keyPress == false){
-    println("Force enabled");
+    println("Box enabled");
     keyPress = true;
   }
   if(keyPressed && key == 's' && keyPress == true){
-    println("Force disabled");
+    println("Box disabled");
     keyPress = false;
   }
   if(keyPressed){
     if(key == 'i'){
       waveIntensity += 0.001;
+      println("Intensity++");
     }
     if(key == 'k'){
       waveIntensity -= 0.001;
+      println("Intensity--");
     }
     if (key == CODED){
       //move = Radius;
       move = Radius/10;
+      boxWaveIntensity = 1;
       if(keyCode == UP && box.position.y-1 > 0){
         box.position.y -= move;
         box.direction.y = -1;
@@ -34,6 +37,9 @@ void keyPressed() {
         box.direction.x = -1;
       }
     }
+  }
+  if(!keyPressed){
+    boxWaveIntensity *= 0.99;
   }
    
 }

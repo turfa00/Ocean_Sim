@@ -6,9 +6,10 @@ public class Height_field{
   }
   
   void drawField() {
-    strokeWeight(1);
-    //stroke(15, 94, 156); //Watery Blue
-    stroke(255, 255, 255);
+    strokeWeight(2);
+    stroke(15, 94, 156); //Watery Blue
+    //stroke(255, 255, 255);
+    //noStroke();
     noFill();
     //Quads
     for(int i = 0; i < N; i++){
@@ -39,7 +40,7 @@ public class Height_field{
   
   
   public void waveSimulation(){ 
-    //Normalize height grid to have ocean like waves
+    //Normaliser la surface pour avoir des vagues comme un ocean
     for(int i = 0; i < N; i++){
       for(int j = 0; j < N; j++){
         Particles[i][j].position.z *= zCoefficient;
@@ -122,7 +123,7 @@ public class Height_field{
         if(tempDir.y < 0 && j > centerY){
           tempIntensity *= zCoefficient;
         }
-        Particles[i][j].position.z += tempIntensity * Particles[i][j].amplitude * sin(((pow(distance,2))/ (Radius)) - timeStep*2);
+        Particles[i][j].position.z += boxWaveIntensity * tempIntensity * Particles[i][j].amplitude * sin(((pow(distance,2))/ (Radius)) - timeStep*2);
       }
     }
     /*for(int i = 0; i < N; i++){
