@@ -15,8 +15,8 @@ Height_field heightField;
 Box box;
 
 void setup(){
-  //fullScreen(P3D);
-  size(1000, 900, P3D);
+  fullScreen(P3D);
+  //size(1000, 900, P3D);
   frameRate(60);
   cam = new PeasyCam(this, 1000);
   cam.setMinimumDistance(-20000);
