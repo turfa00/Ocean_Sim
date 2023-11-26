@@ -1,6 +1,5 @@
 public class Height_field{
   Particle[][] Particles;
-  float [][] zValues;
   Height_field(){
     Particles = new Particle[N][N];
   }
@@ -79,7 +78,6 @@ public class Height_field{
       int centerY = int(box.position.y / Radius);
       //createWaveBox(centerX, centerY, waveIntensity * 4);
       createWaveBox(centerX, centerY, waveIntensity * 4); //For tests
-      //box.direction.mult(0.4);
       box.direction = new PVector(0, 0);
     }
   }
@@ -111,19 +109,19 @@ public class Height_field{
         tempIntensity /= (Radius * 5);
         
         //println(tempIntensity);
-        if(tempDir.x > 0 && i < centerX){
+        if(tempDir.x < 0 && i < centerX){
           tempIntensity *= zCoefficient;
         }
-        if(tempDir.y > 0 && j < centerY){
+        if(tempDir.y < 0 && j < centerY){
           tempIntensity *= zCoefficient;
         }
-        if(tempDir.x < 0 && i > centerX){
+        if(tempDir.x > 0 && i > centerX){
           tempIntensity *= zCoefficient;
         }
-        if(tempDir.y < 0 && j > centerY){
+        if(tempDir.y > 0 && j > centerY){
           tempIntensity *= zCoefficient;
         }
-        Particles[i][j].position.z += boxWaveIntensity * tempIntensity * Particles[i][j].amplitude * sin(((pow(distance,2))/ (Radius)) - timeStep*2);
+        Particles[i][j].position.z +=  boxWaveIntensity * tempIntensity * Particles[i][j].amplitude * sin(((pow(distance,2))/ (Radius)) + timeStep*2);
       }
     }
     /*for(int i = 0; i < N; i++){
