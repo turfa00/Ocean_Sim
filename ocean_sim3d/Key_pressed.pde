@@ -8,13 +8,29 @@ void keyPressed() {
     keyPress = false;
   }
   if(keyPressed){
+    //Quads
+    if(key == '&'){
+      quadView = true;
+      pointView = false;
+      fieldView = false;
+    }
+    //Field
+    else if(key == 'é'){
+      fieldView = true;
+      quadView = false;
+      pointView = false;
+    }
+    //Points
+    else if(key == '"'){
+      pointView = true;
+      fieldView = false;
+      quadView = false;
+    }
     if(key == 'i'){
       waveIntensity += 0.001;
-      println("Intensity++");
     }
     if(key == 'k'){
       waveIntensity -= 0.001;
-      println("Intensity--");
     }
     if (key == CODED){
       //move = Radius;

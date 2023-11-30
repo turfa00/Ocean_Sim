@@ -4,11 +4,9 @@ public class Height_field{
     Particles = new Particle[N][N];
   }
   
-  void drawField() {
+  void drawFieldQuads() {
     strokeWeight(2);
     stroke(15, 94, 156); //Watery Blue
-    //stroke(255, 255, 255);
-    //noStroke();
     noFill();
     //Quads
     for(int i = 0; i < N; i++){
@@ -25,6 +23,25 @@ public class Height_field{
       }
       endShape();
     }
+  }
+  
+  void drawField(){
+    noStroke();
+    //fill(15, 94, 156);
+    PImage img = loadImage("blue.jpg");
+    textureMode(NORMAL); 
+    beginShape();
+    for (int i = 0; i< N-1; i++) {
+      for (int j = 0; j< N-1; j++) {
+        beginShape();
+        texture(img);
+        vertex( (Particles[i][j].position.x)*Radius, (Particles[i][j].position.y)*Radius, Particles[i][j].position.z, 0, 0 );
+        vertex( (Particles[i][j].position.x+1)*Radius, (Particles[i][j].position.y)*Radius, Particles[i+1][j].position.z, 1, 0 );
+        vertex( (Particles[i][j].position.x+1)*Radius, (Particles[i][j].position.y+1)*Radius, Particles[i+1][j+1].position.z, 1, 1 );
+        vertex( (Particles[i][j].position.x)*Radius, (Particles[i][j].position.y+1)*Radius, Particles[i][j+1].position.z, 0, 1 );
+        endShape();
+      }
+    } 
   }
   
   void drawFieldPoints(){ 

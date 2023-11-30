@@ -9,6 +9,8 @@ float maxDistance = sqrt(2 * (N * N)); //Distance maximale du point (0,0) jusqu'
 float zCoefficient = 0.4; //Valeur pour régler la hauteur de la surface
 float startTime, timeStep, timeStepForce; //Valeurs de temps
 boolean keyPress = false;
+//Change view types
+boolean quadView = true, fieldView = false, pointView = false;
 import peasy.*;
 PeasyCam cam;
 Height_field heightField;
@@ -20,7 +22,7 @@ void setup(){
   frameRate(60);
   cam = new PeasyCam(this, 1000);
   cam.setMinimumDistance(-20000);
-  cam.setMaximumDistance(200000000);
+  cam.setMaximumDistance(2000000000);
   heightField = new Height_field();
   //Géneration de tout particules
   for(int i = 0; i < N; i++){
@@ -49,9 +51,15 @@ void setup(){
 void draw(){
   background(0);
   lights();
+  ambientLight(102, 102, 102);
+  directionalLight(200, 200, 200, 0, -1, -0.5);
   heightField.waveSimulation();
-  heightField.drawField();
-  //heightField.drawFieldPoints();
+  if(quadView)
+    heightField.drawFieldQuads();
+  if(fieldView)
+    heightField.drawField();
+  if(pointView)
+    heightField.drawFieldPoints();
   box.drawBox();
   keyPressed();
   timeStep = (millis() - timeStep) / 1000;
