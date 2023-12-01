@@ -14,7 +14,7 @@ void keyPressed() {
       pointView = false;
       fieldView = false;
     }
-    //Field
+    //Field (Ocean)
     else if(key == 'é'){
       fieldView = true;
       quadView = false;

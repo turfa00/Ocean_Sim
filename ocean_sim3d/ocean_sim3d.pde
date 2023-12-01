@@ -1,17 +1,18 @@
-int N = 80; //Nombre de particules = (N-1)^2
+int N = 80; //Nombre de particules de vagues = (N-1)^2
 int nbWaves = 10; //Nombres de vagues qui seront générer aléatoirement sur la surface
-int Radius = 60; //Rayon de chaque particule
+int Radius = 60; //Rayon de chaque particule (Longeur d'onde)
 int minAmplitude = 0, maxAmplitude = 20; //Valeurs minimal et maximal de l'amplitude que peut avoir une vague au création
 float move, boxWaveIntensity; //Mouvement du boite
-int [] randomPos = new int[nbWaves*2];
+int [] randomPos = new int[nbWaves*2]; //Position aléatoires pour les vagues
 float waveIntensity = 0.08; //Valeur pour régler l'intensite de vagues
 float maxDistance = sqrt(2 * (N * N)); //Distance maximale du point (0,0) jusqu'a (N,N)
 float zCoefficient = 0.4; //Valeur pour régler la hauteur de la surface
 float startTime, timeStep, timeStepForce; //Valeurs de temps
 boolean keyPress = false;
-//Change view types
+//Les types de rendu de champ de hauteur
 boolean quadView = true, fieldView = false, pointView = false;
 import peasy.*;
+
 PeasyCam cam;
 Height_field heightField;
 Box box;

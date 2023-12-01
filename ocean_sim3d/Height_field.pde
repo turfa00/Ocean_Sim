@@ -27,7 +27,6 @@ public class Height_field{
   
   void drawField(){
     noStroke();
-    //fill(15, 94, 156);
     PImage img = loadImage("blue.jpg");
     textureMode(NORMAL); 
     beginShape();
@@ -93,8 +92,8 @@ public class Height_field{
       //Si touche éspace appuyer, créer des vagues causé par une force qui vient du quad 
       int centerX = int(box.position.x / Radius);
       int centerY = int(box.position.y / Radius);
-      //createWaveBox(centerX, centerY, waveIntensity * 4);
-      createWaveBox(centerX, centerY, waveIntensity * 4); //For tests
+      //createWaveBox(centerX, centerY, waveIntensity * 6);
+      createWaveBox(centerX, centerY, waveIntensity * 4);
       box.direction = new PVector(0, 0);
     }
   }
@@ -112,10 +111,8 @@ public class Height_field{
   }
   public void createWaveBox(int centerX, int centerY, float intensity){
     //Fonction pour créer des vagues venant du boite
-    float angle = 0.f;
+    float dispersionAngle = 0.f;
     PVector tempDir = box.direction.copy();
-    //float maxIntensity = abs((intensity * 0) - maxDistance);
-    //println(maxIntensity / (Radius * 6));
     float tempIntensity = 0.f;
     for(int i = 0; i < N; i++){
       for(int j = 0; j < N; j++){
@@ -125,7 +122,6 @@ public class Height_field{
         tempIntensity = abs((intensity * distance) - maxDistance);
         tempIntensity /= (Radius * 5);
         
-        //println(tempIntensity);
         if(tempDir.x < 0 && i < centerX){
           tempIntensity *= zCoefficient;
         }
@@ -141,15 +137,5 @@ public class Height_field{
         Particles[i][j].position.z +=  boxWaveIntensity * tempIntensity * Particles[i][j].amplitude * sin(((pow(distance,2))/ (Radius)) + timeStep*2);
       }
     }
-    /*for(int i = 0; i < N; i++){
-      for(int j = 0; j < N; j++){
-        int dx = i - centerX;
-        int dy = j - centerY;
-        float distance = sqrt((dx * dx) + (dy * dy));
-        tempIntensity = abs((intensity * distance) - maxDistance);
-        tempIntensity /= Radius * 6;
-        Particles[i][j].position.z += tempIntensity * Particles[i][j].amplitude * sin(((pow(distance,2))/ (Radius)) - timeStep*2);
-      }
-    }*/
   }
 }
