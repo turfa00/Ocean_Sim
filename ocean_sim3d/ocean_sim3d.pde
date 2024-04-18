@@ -23,7 +23,7 @@ void setup(){
   frameRate(60);
   cam = new PeasyCam(this, 1000);
   cam.setMinimumDistance(-20000);
-  cam.setMaximumDistance(2000000000);
+  cam.setMaximumDistance(1000000000);
   heightField = new Height_field();
   //Géneration de tout particules
   for(int i = 0; i < N; i++){
