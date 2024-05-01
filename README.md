@@ -1,9 +1,9 @@
-# Mise en correspondance d'images parallèle
+# Simulation d'un fluide
 
-La mise en correspondance d'images est une tâche fondamentale dans de nombreux domaines.\
-L'objectif de ce projet est de développer un système de mise en correspondance d'images robuste en utilisant l'algorithme de somme de différences au carré (SSD).\
-Cependant, la complexité computationnelle de cet algorithme peut être élevée, en particulier pour de grandes images ou un grand nombre de correspondances.\
-Donc ce programme est parallélisé avec OpenMp pour accélérer le calcul en répartissant la charge de travail entre plusieurs threads.
+Cette implementation simule la surface d'un fluide en utilisant les fonctions d'ondes, et en représentant la surface par un champ de hauteur(height field), \
+prolongé par des déformations verticales.
+
+
 
 ### Exécution
 Notre code est écrit en Processing, un logiciel flexible et un langage qui se rapproche du java pour coder dans le contexte des arts visuels. 
