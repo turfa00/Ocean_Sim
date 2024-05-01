@@ -1,10 +1,9 @@
 # Simulation d'un fluide
 
-Cette implementation simule la surface d'un fluide en utilisant les fonctions d'ondes, et en représentant la surface par un champ de hauteur(height field), \
+Cette implémentation simule la surface d'un fluide en utilisant les fonctions d'ondes, et en représentant la surface par un champ de hauteur(height field), \
 prolongé par des déformations verticales. et qui peut être perturbé par des forces externes par l'utilisateur.\
-La classe Particle représente chaque particule de vagues contrôler par des équation d’onde sinusoïdale. Pour la simplicite, tout les particules possède le même rayon \
-pour avoir un beau rendu visuel du grille.
-
+La classe Particle représente chaque particule de vagues du fluide contrôlée par des équation d’onde sinusoïdale. Pour la simplicite, tout les particules possède le même rayon \
+pour avoir un rendu visuel uniforme du grille.
 
 
 ### Exécution
