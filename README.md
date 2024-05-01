@@ -6,7 +6,10 @@ La classe Particle représente chaque particule de vagues du fluide contrôlée 
 Pour la simplicite, tout les particules possède le même rayon pour avoir un rendu visuel uniforme du grille.
 
 
-### Exécution
+## Exécution
 Le code est écrit en Processing, un logiciel flexible et un langage qui se rapproche du java pour coder dans le contexte des arts visuels.\
 Pour exécuter le code et voir son résultat, vous devrez télécharger et installer Processing à partir du site officiel. \
 Une fois Processing installé sur votre ordinateur, vous pouvez simplement ouvrir le fichier de code dans l'IDE Processing et l'exécuter pour visualiser les résultats. 
+
+### Résultat
+
