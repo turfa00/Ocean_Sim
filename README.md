@@ -12,4 +12,5 @@ Pour exécuter le code et voir son résultat, vous devrez télécharger et insta
 Une fois Processing installé sur votre ordinateur, vous pouvez simplement ouvrir le fichier de code dans l'IDE Processing et l'exécuter pour visualiser les résultats. 
 
 ### Résultat
+![capture](https://github.com/turfa00/Ocean_Simulation/assets/80334127/d301884e-a14d-443e-a63a-349e7e3a69a5)
 
